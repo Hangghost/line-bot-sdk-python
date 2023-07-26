@@ -46,7 +46,7 @@ def linebot():
                     stop=None
                     )
                 # 接收到回覆訊息後，移除換行符號
-                reply_msg = response["choices"][0]["text"].replace('\n','')
+                reply_msg = response["choices"][0]["message"]["content"]
             else:
                 reply_msg = msg
         else:
