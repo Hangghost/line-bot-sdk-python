@@ -6,3 +6,6 @@ aenum >= 3.1.11
 python_dateutil >= 2.5.3
 Deprecated
 Flask
+
+openai
+linebot
