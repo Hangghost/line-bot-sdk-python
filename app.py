@@ -32,14 +32,14 @@ def linebot():
             reply_msg = ""                                   # 預設回覆訊息
             if ai_msg == 'hi ai:':                                
                 openai.api_type = "azure"
-                openai.api_base = "https://herme-service.openai.azure.com/"
+                openai.api_base = "https://herme-service.openai.azure.com/openai/deployments/GPT-35-turbo/chat/completions?api-version=2023-03-15-preview"
                 openai.api_version = "2023-03-15-preview"
                 openai.api_key = os.getenv("d6576c8d912946aeb070b712e1ca43d5")
                 response = openai.Completion.create(         
                     engine="GPT-35-turbo",
-                    messages = [{"role":"system","content":"You are an Xbox customer support agent whose primary goal is to help users with issues they are experiencing with their Xbox devices. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to Xbox."},{"role":"user","content":"How much is a PS5?"},{"role":"assistant","content":"I apologize, but I do not have information about the prices of other gaming devices such as the PS5. My primary focus is to assist with issues regarding Xbox devices. Is there a specific issue you are having with your Xbox device that I may be able to help with?"},{"role":"user","content":msg[:6]}],                          # 將第六個字元之後的訊息發送給 OpenAI
+                    messages = [{"role":"system","content":"You are an Xbox customer support agent whose primary goal is to help users with issues they are experiencing with their Xbox devices. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to Xbox."},{"role":"user","content":"How much is a PS5?"},{"role":"assistant","content":"I apologize, but I do not have information about the prices of other gaming devices such as the PS5. My primary focus is to assist with issues regarding Xbox devices. Is there a specific issue you are having with your Xbox device that I may be able to help with?"},{"role":"user","content":msg[6:]}],                          # 將第六個字元之後的訊息發送給 OpenAI
                     temperature=0,
-                    max_tokens=350,
+                    max_tokens=100,
                     top_p=0.95,
                     frequency_penalty=0,
                     presence_penalty=0,
