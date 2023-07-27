@@ -39,14 +39,12 @@ def linebot():
                 response = openai.ChatCompletion.create(         
                     engine="gpt-35-turbo",
                     messages = [
-                        {"role":"system","content":"You are an Xbox customer support agent whose primary goal is to help users with issues they are experiencing with their Xbox devices. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to Xbox."},
-                        # {"role":"user","content":"How much is a PS5?"},
-                        # {"role":"assistant","content":"I apologize, but I do not have information about the prices of other gaming devices such as the PS5. My primary focus is to assist with issues regarding Xbox devices. Is there a specific issue you are having with your Xbox device that I may be able to help with?"},
+                        {"role":"system","content":"You are a customer service assistant from the yoga studio, HerMe, whose primary goal is to help users with issues they are experiencing with their yoga class. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to HerMe."},
                         {"role":"user","content":msg[6:]}
                         ],                        # 將第六個字元之後的訊息發送給 OpenAI
-                    temperature=0,
+                    temperature=0.1,
                     max_tokens=100,
-                    top_p=0.95,
+                    top_p=0.90,
                     frequency_penalty=0,
                     presence_penalty=0,
                     stop=None
