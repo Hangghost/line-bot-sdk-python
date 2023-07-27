@@ -43,7 +43,7 @@ def linebot():
                         # {"role":"user","content":"How much is a PS5?"},
                         # {"role":"assistant","content":"I apologize, but I do not have information about the prices of other gaming devices such as the PS5. My primary focus is to assist with issues regarding Xbox devices. Is there a specific issue you are having with your Xbox device that I may be able to help with?"},
                         {"role":"user","content":msg[6:]}
-                        ]                        # 將第六個字元之後的訊息發送給 OpenAI
+                        ],                        # 將第六個字元之後的訊息發送給 OpenAI
                     temperature=0,
                     max_tokens=100,
                     top_p=0.95,
