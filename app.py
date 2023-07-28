@@ -43,7 +43,7 @@ def linebot():
                         {"role":"user","content":msg[6:]}
                         ],                        # 將第六個字元之後的訊息發送給 OpenAI
                     temperature=0.1,
-                    max_tokens=100,
+                    max_tokens=350,
                     top_p=0.90,
                     frequency_penalty=0,
                     presence_penalty=0,
