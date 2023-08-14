@@ -18,12 +18,12 @@ def linebot():
     body = request.get_data(as_text=True)                    # 取得收到的訊息內容
     json_data = json.loads(body)                         # json 格式化訊息內容
     try:
-        access_token = os.getenv(LINE_ACCESS_TOKEN)
-        secret = os.getenv(LINE_SECRET)
+        access_token = os.environ[LINE_ACCESS_TOKEN]
+        secret = os.environ[LINE_SECRET]
         openai.api_type = "azure"
-        openai.api_base = os.getenv(AZURE_OPENAI_ENDPOINT)
+        openai.api_base = os.environ[AZURE_OPENAI_ENDPOINT]
         openai.api_version = "2023-03-15-preview"
-        openai.api_key = os.getenv(AZURE_OPENAI_KEY)
+        openai.api_key = os.environ[AZURE_OPENAI_KEY]
         
         line_bot_api = LineBotApi(access_token)              # 確認 token 是否正確
         handler = WebhookHandler(secret)                     # 確認 secret 是否正確
