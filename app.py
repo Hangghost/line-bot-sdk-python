@@ -18,12 +18,12 @@ def linebot():
     body = request.get_data(as_text=True)                    # 取得收到的訊息內容
     json_data = json.loads(body)                         # json 格式化訊息內容
     try:
-        access_token = 'EU16pZnitJZotJBmSSMxizmnT7TsmYrVI6GLIzDHJDWFHs/1IMKW3rUMB0pJc2razv8npE2l7LT9u47K1c7ytC4493F4w3U4U+8XbdI3rhV6ceOw0zP5LhOIz/1DB9Urm3SBadKi/I4naS+7+mxXsgdB04t89/1O/w1cDnyilFU='
-        secret = 'fa5368b825917a6136d1f10fa753f1de'
+        access_token = os.getenv(LINE_ACCESS_TOKEN)
+        secret = os.getenv(LINE_SECRET)
         openai.api_type = "azure"
-        openai.api_base = "https://herme-service.openai.azure.com/"
+        openai.api_base = os.getenv(AZURE_OPENAI_ENDPOINT)
         openai.api_version = "2023-03-15-preview"
-        openai.api_key = "d6576c8d912946aeb070b712e1ca43d5"
+        openai.api_key = os.getenv(AZURE_OPENAI_KEY)
         
         line_bot_api = LineBotApi(access_token)              # 確認 token 是否正確
         handler = WebhookHandler(secret)                     # 確認 secret 是否正確
