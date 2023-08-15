@@ -66,7 +66,7 @@ def linebot():
                     stop=None
                     )
                 # 接收到回覆訊息後，移除換行符號
-                reply_msg = response["choices"][0]["message"]["content"]
+                reply_msg = response["choices"][0]["message"]["content"] + msg[6:]
             else:
                 reply_msg = msg
         else:
@@ -74,7 +74,7 @@ def linebot():
 
   
 
-        line_bot_api.reply_message(tk,TextSendMessage(reply_msg, msg))# 回傳訊息
+        line_bot_api.reply_message(tk,TextSendMessage(reply_msg))# 回傳訊息
     except:
         print(body)                                          # 如果發生錯誤，印出收到的內容
     return 'OK'                                              # 驗證 Webhook 使用，不能省略
