@@ -24,9 +24,9 @@ def linebot():
         openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
         openai.api_version = "2023-03-15-preview"
         openai.api_key = os.environ['AZURE_OPENAI_KEY']
-        # cogsearch_endpoint = os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']  ## https://herme-line-search.search.windows.net
-        # cogsearch_key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']          ## eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3
-        # cogsearch_index_name = os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']        ## azureblob-index-l-l-2
+        cogsearch_endpoint = os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']  ## https://herme-line-search.search.windows.net
+        cogsearch_key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']          ## eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3
+        cogsearch_index_name = os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']        ## azureblob-index-l-l-2
         
 
         line_bot_api = LineBotApi(access_token)              # 確認 token 是否正確
@@ -48,9 +48,9 @@ def linebot():
                         {
                               "type": "AzureCognitiveSearch",
                               "parameters": {
-                                "endpoint": "'https://herme-line-search.search.windows.net'",
-                                "key": "'eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3'",
-                                "indexName": "'azureblob-index-l-l-2'"
+                                "endpoint": cogsearch_endpoint,
+                                "key": cogsearch_key,
+                                "indexName": cogsearch_index_name
                               }
                         }
                     ],
