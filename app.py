@@ -24,9 +24,9 @@ def linebot():
         openai.api_base = os.environ['AZURE_OPENAI_ENDPOINT']
         openai.api_version = "2023-03-15-preview"
         openai.api_key = os.environ['AZURE_OPENAI_KEY']
-        cogsearch_endpoint = os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']  ## https://herme-line-search.search.windows.net
-        cogsearch_key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']          ## eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3
-        cogsearch_index_name = os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']        ## azureblob-index-l-l-2
+        # cogsearch_endpoint = os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']  
+        # cogsearch_key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']          
+        # cogsearch_index_name = os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']        
         
 
         line_bot_api = LineBotApi(access_token)              # 確認 token 是否正確
@@ -44,16 +44,16 @@ def linebot():
             if ai_msg == 'hi ai:':                                
                 response = openai.ChatCompletion.create(         
                     engine="gpt-35-turbo",
-                    dataSources = [
-                        {
-                              "type": "AzureCognitiveSearch",
-                              "parameters": {
-                                "endpoint": cogsearch_endpoint,
-                                "key": cogsearch_key,
-                                "indexName": cogsearch_index_name
-                              }
-                        }
-                    ],
+                    # dataSources = [
+                    #     {
+                    #           "type": "AzureCognitiveSearch",
+                    #           "parameters": {
+                    #             "endpoint": cogsearch_endpoint,
+                    #             "key": cogsearch_key,
+                    #             "indexName": cogsearch_index_name
+                    #           }
+                    #     }
+                    # ],
                     messages = [
                         {"role":"system","content":"You are a customer service assistant from the yoga studio, HerMe, whose primary goal is to help users with issues they are experiencing with their yoga class. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to HerMe."},
                         {"role":"user","content":msg[6:]}
@@ -66,7 +66,7 @@ def linebot():
                     stop=None
                     )
                 # 接收到回覆訊息後，移除換行符號
-                reply_msg = response["choices"][0]["message"]["content"] + msg[6:]
+                reply_msg = response["choices"][0]["message"]["content"]
             else:
                 reply_msg = msg
         else:
@@ -75,6 +75,7 @@ def linebot():
   
 
         line_bot_api.reply_message(tk,TextSendMessage(reply_msg))# 回傳訊息
+        line_bot_api.reply_message(tk,TextSendMessage(msg[6:]))
     except:
         print(body)                                          # 如果發生錯誤，印出收到的內容
     return 'OK'                                              # 驗證 Webhook 使用，不能省略
