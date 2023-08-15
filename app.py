@@ -28,13 +28,15 @@ def linebot():
         # cogsearch_key = os.environ['AZURE_COGNITIVE_SEARCH_KEY']          ## eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3
         # cogsearch_index_name = os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']        ## azureblob-index-l-l-2
         
-        
+
         line_bot_api = LineBotApi(access_token)              # 確認 token 是否正確
         handler = WebhookHandler(secret)                     # 確認 secret 是否正確
         signature = request.headers['X-Line-Signature']      # 加入回傳的 headers
         handler.handle(body, signature)                      # 綁定訊息回傳的相關資訊
         tk = json_data['events'][0]['replyToken']            # 取得回傳訊息的 Token
         type = json_data['events'][0]['message']['type']     # 取得 LINe 收到的訊息類型
+
+
         if type=='text':
             msg = json_data['events'][0]['message']['text']  # 取得 LINE 收到的文字訊息
             ai_msg = msg[:6].lower()                         # 取出文字的前五個字元，轉換成小寫
@@ -46,9 +48,9 @@ def linebot():
                         {
                               "type": "AzureCognitiveSearch",
                               "parameters": {
-                                "endpoint": "https://herme-line-search.search.windows.net",
-                                "key": "eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3",
-                                "indexName": "azureblob-index-l-l-2"
+                                "endpoint": "'https://herme-line-search.search.windows.net'",
+                                "key": "'eBqWb0ajjRqtWsihRbR2htNZzYyanrMiqOjSHD5EyvAzSeCPf5u3'",
+                                "indexName": "'azureblob-index-l-l-2'"
                               }
                         }
                     ],
@@ -69,6 +71,9 @@ def linebot():
                 reply_msg = msg
         else:
             reply_msg = '你傳的不是文字呦～'
+
+  
+
         line_bot_api.reply_message(tk,TextSendMessage(reply_msg))# 回傳訊息
     except:
         print(body)                                          # 如果發生錯誤，印出收到的內容
