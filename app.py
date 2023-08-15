@@ -38,15 +38,16 @@ def linebot():
             if ai_msg == 'hi ai:':                                
                 response = openai.ChatCompletion.create(         
                     engine="gpt-35-turbo",
-                    # dataSources = [
-                    #     {"type": "AzureCognitiveSearch",
-                    #      "parameters": {
-                    #         "endpoint": os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT'],
-                    #         "key": os.environ['AZURE_COGNITIVE_SEARCH_KEY'],
-                    #         "indexName": os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']
-                    #         }
-                    #     }
-                    #     ],
+                    dataSources = [
+                        {
+                              "type": "AzureCognitiveSearch",
+                              "parameters": {
+                                "endpoint": "os.environ['AZURE_COGNITIVE_SEARCH_ENDPOINT']",
+                                "key": "os.environ['AZURE_COGNITIVE_SEARCH_KEY']",
+                                "indexName": "os.environ['AZURE_COGNITIVE_SEARCH_INDEX_NAME']"
+                              }
+                        }
+                    ],
                     messages = [
                         {"role":"system","content":"You are a customer service assistant from the yoga studio, HerMe, whose primary goal is to help users with issues they are experiencing with their yoga class. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to HerMe."},
                         {"role":"user","content":msg[6:]}
